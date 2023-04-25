@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Eğitim Sayfası</title>
+    <link rel="stylesheet" href="kategori.css">
+</head>
+<body>
+    <div class="box"> <!-- ortaya gelecek kahverengi kareyi yaptık-->
+	<h2>Eğitimler:</h2>
+
+	<script>
+		var elemanSayisi = parseInt(getParameterByName("elemanSayisi"));
+		var dizi = ["üniversite", "lise", "ortaokul", "ilkokul", "anaokulu", "kurslar", "belgeler", "sertifikalar","yükseklisans"];
+		var elemanlar = "";
+		for (var i = 0; i < elemanSayisi; i++) {
+			if (i >= dizi.length) {
+				break;
+			}
+			elemanlar += dizi[i] + "<br>";
+		}
+		document.write(elemanlar);
+		
+		function getParameterByName(name, url) {
+			if (!url) url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+	</script>
+    </div>
+</body>
+</html>

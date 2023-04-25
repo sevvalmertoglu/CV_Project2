@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Şevval Mertoğlu</title>
+    <link rel="stylesheet" href="style.css"> <!-- Css dosyasıyla html dosyasını bağladık -->
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <li><a href="index.html">ANA SAYFA</a></li>
+            <li><a href="iletisim.html">İLETİŞİM</a></li>
+        </div>
+	
+        <div class="center">
+            <label for="numara">Okul numarası girin:</label>
+            <input type="number" id="numara" name="numara" maxlength="12" placeholder="----1317----">
+            <button onclick="harfAtaVeYonlendir(),getFirstFourDigits()">Yönlendir</button>
+          
+        </div>
+
+
+	<script>
+        function getFirstFourDigits() {
+                var number = document.getElementById("numara").value;
+                var firstFourDigits = number.toString().substring(0, 4);
+                var fourthDigits = number.toString().substring(8,9);
+                var thirdDigits = number.toString().substring(9,10);
+                var secondDigits = number.toString().substring(10,11);
+                var firstDigits = number.toString().substring(11,12);
+                let E = parseInt(fourthDigits);
+                let F = parseInt(thirdDigits);
+                let G = parseInt(secondDigits);
+                let H = parseInt(firstDigits);
+                ABCD = firstFourDigits
+                x = 2023 - ABCD //Yılı belirledim
+                var puan = (E*Math.pow(x,3) + F*Math.pow(x,2) + G*x + H) / Math.pow(x,4); //Puan fonksiyonunu yazdım
+                alert("Puanınız:" + puan)
+                alert("Şanslı no: " + (100 * (Math.random() + puan ))); //Şanslı no'yu hesapladım
+
+        }
+
+		function harfAtaVeYonlendir() {
+			// Numarayı al
+			var numara = document.getElementById("numara").value;
+			
+			// Son dört rakamı al
+			var sonDort = numara.slice(-4);
+			
+			// Harflere atama yap
+			var harfler = ["E", "F", "G", "H"];
+			var atamalar = {};
+			for (var i = 0; i < sonDort.length; i++) {
+				atamalar[harfler[i]] = sonDort[i];
+			}
+			
+			// Yönlendir
+			var harf = prompt("Hangi sayfaya gitmek istiyorsunuz? E-Amaç F-Eğitim G-Dil H-Kariyer ");
+			var elemanSayisi = parseInt(harfAta(harf, atamalar));
+			if (harf == "E") {
+				window.location.href = "amac.html?elemanSayisi=" + elemanSayisi;
+			} else if (harf == "F") {
+				window.location.href = "egitim.html?elemanSayisi=" + elemanSayisi;
+			} else if (harf == "G") {
+				window.location.href = "dil.html?elemanSayisi=" + elemanSayisi;
+			} else if (harf == "H") {
+				window.location.href = "kariyer.html?elemanSayisi=" + elemanSayisi;
+			} 
+		}
+		
+		function harfAta(harf, atamalar) {
+			if (atamalar.hasOwnProperty(harf)) {
+				return atamalar[harf];
+			} else {
+				return 0;
+			}
+		}
+	</script>
+    </div>
+</body>
+</html>
